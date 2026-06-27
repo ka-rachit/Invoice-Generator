@@ -12,15 +12,14 @@
   <a href="#-live-demo">Live Demo</a> •
   <a href="#-features">Features</a> •
   <a href="#-tech-stack">Tech Stack</a> •
-  <a href="#-project-structure">Project Structure</a> •
+  <a href="#-project-structure">Project Structure</a>
 </p>
 
 ---
 
 ## 🌐 Live Demo
 
-> 🚀 **[Visit Here →](#)**  
-> *https://invoice-generator-krachit.vercel.app/*
+> 🚀 **Visit Here →** *https://invoice-generator-krachit.vercel.app/*
 
 ---
 
