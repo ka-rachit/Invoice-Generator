@@ -1,6 +1,6 @@
 export const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? "http://localhost:5000"
-  : "https://h9p9b03w-5000.inc1.devtunnels.ms/";
+  : "https://invoice-generator-lkxw.onrender.com";
 
 export const API_PATHS = {
   AUTH: {
