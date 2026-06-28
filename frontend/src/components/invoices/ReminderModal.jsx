@@ -178,10 +178,12 @@ const ReminderModal = ({isOpen, onClose, invoiceId}) => {
                     </div>
 
                     {/* Actions */}
-                    <div className="flex justify-end space-x-3 mt-6">
-                        <Button variant="secondary" onClick={onClose}>Close</Button>
+                    <div className="flex flex-col sm:flex-row justify-end gap-3 mt-6">
+                        <Button variant="secondary" onClick={onClose} className="w-full sm:w-auto">
+                            Close
+                        </Button>
                         
-                        <Button onClick={handleCopyToClipboard} icon={hasCopied ? Check : Copy} disabled={isGenerating || !reminderText}>
+                        <Button onClick={handleCopyToClipboard} icon={hasCopied ? Check : Copy} disabled={isGenerating || !reminderText} className="w-full sm:w-auto">
                             {hasCopied ? 'Copied' : 'Copy Text'}
                         </Button>
                         
@@ -189,7 +191,7 @@ const ReminderModal = ({isOpen, onClose, invoiceId}) => {
                             onClick={handleAction} 
                             icon={Send} 
                             disabled={isGenerating || !reminderText || (reminderType === "email" ? !clientEmail : !clientPhone)}
-                            className={reminderType === "whatsapp" ? "bg-emerald-600 hover:bg-emerald-700 min-w-fit whitespace-nowrap" : "bg-blue-600 hover:bg-blue-700"}
+                            className={`w-full sm:w-auto ${reminderType === "whatsapp" ? "bg-emerald-600 hover:bg-emerald-700 text-white" : "bg-blue-600 hover:bg-blue-700"}`}
                         >
                             {reminderType === "email" ? "Send Email" : "Send WhatsApp"}
                         </Button>

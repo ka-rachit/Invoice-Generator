@@ -64,7 +64,7 @@ const PublicInvoiceView = () => {
                     </div>
                     <div>
                         <h1 className="text-lg font-semibold text-slate-900">Invoice #{invoice.invoiceNumber}</h1>
-                        <p className="text-xs text-slate-500">Shared via InvoGen</p>
+                        <p className="text-xs text-slate-500">Shared via Invoice Generator</p>
                     </div>
                 </div>
                 <button
@@ -219,7 +219,7 @@ const PublicInvoiceView = () => {
 
                     {/* Footer */}
                     <div className="mt-12 pt-6 text-center text-xs text-slate-400">
-                        Created with <span className="font-semibold">InvoGen</span>
+                        Created with <span className="font-semibold">Invoice Generator</span>
                     </div>
                 </div>
             </div>
