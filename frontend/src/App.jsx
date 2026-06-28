@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import AllInvoices from "./pages/Invoices/AllInvoices";
 import CreateInvoice from "./pages/Invoices/CreateInvoice";
 import InvoiceDetail from "./pages/Invoices/InvoiceDetail";
+import PublicInvoiceView from "./pages/Invoices/PublicInvoiceView";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
@@ -20,6 +21,7 @@ const App = () => {
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/invoice/view/:id" element={<PublicInvoiceView />} />
 
                     {/* Protected Routes */}
                     <Route path="/" element={<ProtectedRoute />}>

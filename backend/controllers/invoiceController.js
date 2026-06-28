@@ -140,6 +140,31 @@ exports.deleteInvoice = async (req, res) => {
 };
 
 
+// @desc     Get invoice by ID (Public - no auth required)
+// @route    GET /api/invoices/public/:id
+// @access   Public
+exports.getPublicInvoice = async (req, res) => {
+    try {
+        const invoice = await Invoice.findById(req.params.id);
+        if (!invoice) return res.status(404).json({message: "Invoice Not Found"});
 
-
+        // Return only the data needed for viewing — no sensitive user info
+        res.json({
+            invoiceNumber: invoice.invoiceNumber,
+            invoiceDate: invoice.invoiceDate,
+            dueDate: invoice.dueDate,
+            billFrom: invoice.billFrom,
+            billTo: invoice.billTo,
+            items: invoice.items,
+            notes: invoice.notes,
+            paymentTerms: invoice.paymentTerms,
+            status: invoice.status,
+            subtotal: invoice.subtotal,
+            taxTotal: invoice.taxTotal,
+            total: invoice.total,
+        });
+    } catch (error) {
+        res.status(500).json({message: "Error fetching invoice", error: error.message});
+    }
+};
 

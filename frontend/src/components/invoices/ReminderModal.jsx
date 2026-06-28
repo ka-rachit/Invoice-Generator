@@ -7,17 +7,28 @@ import {API_PATHS} from "../../utils/apiPaths";
 import toast from "react-hot-toast";
 
 const ReminderModal = ({isOpen, onClose, invoiceId}) => {
-    const [reminderType, setReminderType] = useState("email");
+    const [reminderType, setReminderType] = useState("email"); // "email" or "whatsapp"
     const [reminderText, setReminderText] = useState("");
     const [clientEmail, setClientEmail] = useState("");
     const [clientPhone, setClientPhone] = useState("");
     const [isGenerating, setIsGenerating] = useState(false);
     const [hasCopied, setHasCopied] = useState(false);
 
+    // Build the shareable invoice link
+    const invoiceViewLink = invoiceId
+        ? `${window.location.origin}/invoice/view/${invoiceId}`
+        : "";
+
+    const buildLinkHeader = () => {
+        return `View your invoice: ${invoiceViewLink}\n\n`;
+    };
+
     useEffect(() => {
         if (isOpen && invoiceId) {
-            setReminderText("");
             setHasCopied(false);
+            // Prepend the invoice link as default text
+            setReminderText(buildLinkHeader());
+
             const fetchInvoice = async () => {
                 try {
                     const response = await axiosInstance.get(API_PATHS.INVOICE.GET_INVOICE_BY_ID(invoiceId));
@@ -32,6 +43,13 @@ const ReminderModal = ({isOpen, onClose, invoiceId}) => {
         }
     }, [isOpen, invoiceId]);
 
+    // When switching tabs, reset the text with the link header
+    useEffect(() => {
+        if (isOpen && invoiceId) {
+            setReminderText(buildLinkHeader());
+        }
+    }, [reminderType]);
+
     const handleGenerateWithAI = async () => {
         setIsGenerating(true);
         try {
@@ -39,7 +57,8 @@ const ReminderModal = ({isOpen, onClose, invoiceId}) => {
                 ? API_PATHS.AI.GENERATE_REMINDER
                 : API_PATHS.AI.GENERATE_WHATSAPP_REMINDER;
             const response = await axiosInstance.post(endpoint, {invoiceId});
-            setReminderText(response.data.reminderText);
+            // Prepend the link header before the AI-generated text
+            setReminderText(buildLinkHeader() + response.data.reminderText);
         } catch (err) {
             toast.error(`Failed to generate ${reminderType === "email" ? "email" : "WhatsApp"} reminder with AI`);
             console.error("AI reminder error", err);
